@@ -1,0 +1,185 @@
+{
+  "source": "UJIIndoorLoc: trainingData.csv -> validationData.csv (official split)",
+  "n_train": 19937,
+  "n_test": 1111,
+  "features": "powed",
+  "knn": {
+    "cv": {
+      "n": 19937,
+      "mean_m": 3.015,
+      "median_m": 0.0,
+      "p75_m": 2.901,
+      "p95_m": 12.763,
+      "floor_acc": 0.993,
+      "building_acc": 0.996
+    },
+    "split": {
+      "n": 1111,
+      "mean_m": 8.148,
+      "median_m": 4.774,
+      "p75_m": 9.863,
+      "p95_m": 23.442,
+      "floor_acc": 0.933,
+      "building_acc": 0.996
+    },
+    "seconds": 7.2,
+    "k": 3,
+    "metric": "euclidean",
+    "k_sweep": [
+      {
+        "k": 1,
+        "n": 1111,
+        "mean_m": 9.093,
+        "median_m": 5.314,
+        "p75_m": 10.875,
+        "p95_m": 26.304,
+        "floor_acc": 0.929,
+        "building_acc": 0.996
+      },
+      {
+        "k": 2,
+        "n": 1111,
+        "mean_m": 8.28,
+        "median_m": 5.038,
+        "p75_m": 10.035,
+        "p95_m": 24.71,
+        "floor_acc": 0.929,
+        "building_acc": 0.996
+      },
+      {
+        "k": 3,
+        "n": 1111,
+        "mean_m": 8.148,
+        "median_m": 4.774,
+        "p75_m": 9.863,
+        "p95_m": 23.442,
+        "floor_acc": 0.933,
+        "building_acc": 0.996
+      },
+      {
+        "k": 5,
+        "n": 1111,
+        "mean_m": 8.156,
+        "median_m": 4.84,
+        "p75_m": 9.895,
+        "p95_m": 23.403,
+        "floor_acc": 0.935,
+        "building_acc": 0.997
+      },
+      {
+        "k": 7,
+        "n": 1111,
+        "mean_m": 8.28,
+        "median_m": 4.921,
+        "p75_m": 9.393,
+        "p95_m": 23.362,
+        "floor_acc": 0.933,
+        "building_acc": 0.996
+      },
+      {
+        "k": 10,
+        "n": 1111,
+        "mean_m": 8.469,
+        "median_m": 5.072,
+        "p75_m": 9.656,
+        "p95_m": 23.635,
+        "floor_acc": 0.934,
+        "building_acc": 0.995
+      },
+      {
+        "k": 15,
+        "n": 1111,
+        "mean_m": 8.891,
+        "median_m": 5.017,
+        "p75_m": 9.657,
+        "p95_m": 24.473,
+        "floor_acc": 0.935,
+        "building_acc": 0.995
+      }
+    ]
+  },
+  "mlp": {
+    "cv": {
+      "n": 19937,
+      "mean_m": 6.205,
+      "median_m": 4.489,
+      "p75_m": 7.288,
+      "p95_m": 15.085,
+      "floor_acc": 0.994,
+      "building_acc": 0.998
+    },
+    "split": {
+      "n": 1111,
+      "mean_m": 9.702,
+      "median_m": 7.023,
+      "p75_m": 11.894,
+      "p95_m": 26.859,
+      "floor_acc": 0.937,
+      "building_acc": 0.995
+    },
+    "seconds": 211.0,
+    "hidden": [
+      256,
+      128
+    ]
+  },
+  "knn_variants": [
+    {
+      "features": "positive",
+      "metric": "euclidean",
+      "n": 1111,
+      "mean_m": 8.919,
+      "median_m": 5.486,
+      "p75_m": 10.85,
+      "p95_m": 27.391,
+      "floor_acc": 0.897,
+      "building_acc": 0.995
+    },
+    {
+      "features": "positive",
+      "metric": "manhattan",
+      "n": 1111,
+      "mean_m": 10.961,
+      "median_m": 5.589,
+      "p75_m": 11.173,
+      "p95_m": 34.466,
+      "floor_acc": 0.887,
+      "building_acc": 0.987
+    },
+    {
+      "features": "powed",
+      "metric": "euclidean",
+      "n": 1111,
+      "mean_m": 8.148,
+      "median_m": 4.774,
+      "p75_m": 9.863,
+      "p95_m": 23.442,
+      "floor_acc": 0.933,
+      "building_acc": 0.996
+    },
+    {
+      "features": "powed",
+      "metric": "manhattan",
+      "n": 1111,
+      "mean_m": 10.044,
+      "median_m": 4.973,
+      "p75_m": 10.342,
+      "p95_m": 28.192,
+      "floor_acc": 0.911,
+      "building_acc": 0.992
+    }
+  ],
+  "rssi_repeatability_db": {
+    "any phone": {
+      "n_pairs": 21821,
+      "median_std": 2.95,
+      "p90_std": 6.31
+    },
+    "same phone": {
+      "n_pairs": 32137,
+      "median_std": 1.93,
+      "p90_std": 4.26
+    }
+  },
+  "seconds_total": 229.2
+}
