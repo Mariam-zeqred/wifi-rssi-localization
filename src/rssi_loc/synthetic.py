@@ -21,10 +21,13 @@ def make_building(
     floors: int = 2,
     noise_db: float = 3.0,
     seed: int = 0,
+    layout_seed: int = 0,
 ) -> Fingerprints:
+    """`layout_seed` fixes where the access points are; `seed` draws the fingerprints."""
+    layout = np.random.default_rng(layout_seed)
+    ap_xy = layout.uniform((0, 0), size_m, size=(n_ap, 2))
+    ap_floor = layout.integers(0, floors, size=n_ap)
     rng = np.random.default_rng(seed)
-    ap_xy = rng.uniform((0, 0), size_m, size=(n_ap, 2))
-    ap_floor = rng.integers(0, floors, size=n_ap)
     xy = rng.uniform((0, 0), size_m, size=(n, 2))
     floor = rng.integers(0, floors, size=n)
     d = np.hypot(*(xy[:, None, :] - ap_xy[None, :, :]).transpose(2, 0, 1))  # (n, n_ap)
