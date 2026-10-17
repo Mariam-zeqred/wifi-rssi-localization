@@ -1,0 +1,20 @@
+[project]
+name = "wifi-rssi-localization"
+version = "0.1.0"
+description = "Wi-Fi RSSI fingerprinting indoor localisation (kNN and MLP) on the UJIIndoorLoc dataset."
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+filterwarnings = ["ignore::sklearn.exceptions.ConvergenceWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "N"]

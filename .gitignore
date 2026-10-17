@@ -1,0 +1,24 @@
+# secrets (none are needed; keep the pattern anyway)
+.env
+*.key
+*secrets*
+
+# data: the two UJIIndoorLoc CSVs are 42 MB + 2.3 MB and are downloaded by `make data`
+data/
+!data/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# editors
+.vscode/
+.idea/
+*.swp
