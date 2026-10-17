@@ -15,7 +15,7 @@ lint:
 test:
 	$(PY) -m pytest -q
 
-# The full pipeline on a small synthetic building (no download, ~10 s). Proves the code runs.
+# The full pipeline on a small synthetic building (no download, ~15 s). Proves the code runs. Output is git-ignored.
 smoke:
 	$(PY) -m rssi_loc run --synthetic --out results/smoke --figures figures/smoke
 

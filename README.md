@@ -47,7 +47,7 @@ can reach it also confirms the archive matches (a mismatch is logged and the cop
 ```bash
 pip install -r requirements.txt
 make check      # ruff + 14 pytest tests (synthetic building, no download)
-make smoke      # whole pipeline on the synthetic building, ~20 s
+make smoke      # whole pipeline on the synthetic building, ~15 s (writes results/smoke and figures/smoke, not committed)
 make all        # = make data + make figures: real data, results.json, figures (4 min on 4 cores)
 python -m rssi_loc run --k 5 --metric manhattan --features positive   # variants
 ```
@@ -159,7 +159,7 @@ case the Wi-Fi that is already there, plus the fingerprinting in this repo, is t
 ```
 src/rssi_loc/   data.py features.py models.py evaluate.py plots.py synthetic.py cli.py
 tests/          14 tests on a synthetic building; test_cli runs the whole pipeline
-results/        results.json (real), results/smoke (synthetic)
+results/        results.json (real); results/smoke is written by `make smoke` and git-ignored
 figures/        01_error_cdf  02_k_sweep  03_knn_map  03_mlp_map  04_rssi_repeatability
 ```
 
