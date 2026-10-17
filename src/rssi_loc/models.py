@@ -29,10 +29,11 @@ class KnnLocalizer:
 
     Position = inverse-distance weighted mean of the k nearest reference fingerprints;
     floor and building = weighted majority vote over the same k neighbours.
-    Manhattan distance in feature space is the classic choice (Torres-Sospedra 2015).
+    Manhattan distance is the classic choice (Torres-Sospedra 2015); Euclidean did better on
+    the official split here (see results.json "knn_variants"), so it is the default.
     """
 
-    def __init__(self, k: int = 3, metric: str = "manhattan", weighted: bool = True):
+    def __init__(self, k: int = 3, metric: str = "euclidean", weighted: bool = True):
         self.k, self.metric, self.weighted = k, metric, weighted
         self._nn = NearestNeighbors(n_neighbors=k, metric=metric)
 

@@ -21,7 +21,8 @@ def test_run_synthetic_end_to_end(tmp_path):
     )
     res = json.loads((out / "results.json").read_text())
     assert res["knn"]["split"]["n"] == 150 and res["mlp"]["cv"]["n"] == 600
-    assert len(res["knn"]["k_sweep"]) == 7
+    assert len(res["knn"]["k_sweep"]) == 7 and len(res["knn_variants"]) == 4
+    assert res["knn"]["metric"] == "euclidean"
     names = sorted(p.name for p in figs.glob("*.png"))
     assert names == [
         "01_error_cdf.png",

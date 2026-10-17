@@ -47,7 +47,7 @@ def run(args: argparse.Namespace) -> dict:
     errs: dict[str, np.ndarray] = {}
 
     def make_knn(k: int = args.k) -> KnnLocalizer:
-        return KnnLocalizer(k=k)
+        return KnnLocalizer(k=k, metric=args.metric)
 
     def make_mlp() -> MlpLocalizer:
         return MlpLocalizer(hidden=args.hidden, seed=0)
@@ -65,12 +65,32 @@ def run(args: argparse.Namespace) -> dict:
         }
         print(f"{name:4s} CV: {m_cv.as_dict()}\n{name:4s} split: {m_split.as_dict()}")
         plots.prediction_map(test.xy, pred.xy, figs / f"03_{name}_map.png", f"{name}: {source}")
-    res["knn"]["k"] = args.k
+    res["knn"]["k"], res["knn"]["metric"] = args.k, args.metric
     res["mlp"]["hidden"] = list(args.hidden)
 
     sweep = evaluate.k_sweep(KS, x_tr, train, x_te, test, make_knn)
     res["knn"]["k_sweep"] = sweep.to_dict(orient="records")
     print(sweep.to_string(index=False))
+
+    # Which feature representation and which distance? kNN only, official split, same k.
+    res["knn_variants"] = [
+        {
+            "features": kind,
+            "metric": metric,
+            **evaluate.summarise(
+                evaluate.fit_predict(
+                    KnnLocalizer(k=args.k, metric=metric),
+                    transform(train.rssi, kind),
+                    train,
+                    transform(test.rssi, kind),
+                ),
+                test,
+            ).as_dict(),
+        }
+        for kind in KINDS
+        for metric in ("euclidean", "manhattan")
+    ]
+    print("knn variants:", *res["knn_variants"], sep="\n  ")
 
     stds = {
         "any phone": evaluate.rssi_repeatability(train),
@@ -107,6 +127,7 @@ def main(argv: list[str] | None = None) -> None:
     r.add_argument("--figures", default="figures")
     r.add_argument("--features", default="powed", choices=KINDS)
     r.add_argument("--k", type=int, default=3)
+    r.add_argument("--metric", default="euclidean", choices=["euclidean", "manhattan"])
     r.add_argument("--folds", type=int, default=5)
     r.add_argument("--hidden", type=int, nargs="+", default=[256, 128])
     args = p.parse_args(argv)
