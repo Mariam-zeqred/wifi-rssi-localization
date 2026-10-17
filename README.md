@@ -90,7 +90,7 @@ fingerprints; the choice of split matters far more than any of them.
 ![kNN map](figures/03_knn_map.png)
 
 Most predictions land within a room or two; the long lines are fingerprints placed in the wrong
-wing or, in the worst cases, the wrong building (4 of 1 111 for kNN).
+wing or, in the worst cases, the wrong building (4 of 1 111 for kNN; 13 errors exceed 50 m).
 
 ## Why RSSI is noisy
 
@@ -99,9 +99,9 @@ wing or, in the worst cases, the wrong building (4 of 1 111 for kNN).
 For every (reference point, access point) pair seen at least five times in the training set, the
 figure shows the standard deviation of the RSSI. The median is 3.0 dB across all phones and
 1.9 dB when only one phone is at that spot; one in ten pairs varies by more than
-6.3 dB. Over a log-distance path-loss model with exponent 3, 3.0 dB is a factor of
-1.3 in distance, which is roughly the median error above. The causes, in the order
-they usually matter indoors:
+6.3 dB. Under a log-distance path-loss model with exponent 3, 3.0 dB is a factor of 1.3 in
+distance: about ±4 m at 15 m from one access point, the same order as the median error. The
+causes, in the order they usually matter indoors:
 
 - **Multipath fading.** Reflections add with different phases; moving the phone a few
   centimetres changes the sum by several dB.
@@ -141,7 +141,7 @@ case the Wi-Fi that is already there, plus the fingerprinting in this repo, is t
   not meaningful.
 - No hyper-parameter search on the test set beyond the k sweep and the four variants shown; the
   MLP architecture is a reasonable default, not a tuned one. Published results on this split
-  range from about 8 m for tuned kNN to lower with per-building models and ensembles.
+  are in the same range for plain kNN and lower for hierarchical models and ensembles.
 - Floor is predicted by vote or by a classifier, not by a hierarchy (building, then floor, then
   position); the hierarchical approach is the usual next step and is left as an extension.
 - Nothing runs on a phone here: the fingerprints are evaluated offline.
